@@ -5,7 +5,7 @@ import asyncHandler from 'express-async-handler'
 //@desc     Fetch All products
 //@route    GET /api/products
 //@access   Public 
-const getAllProducts  = asyncHandler(async (req, res) => {
+const getProducts  = asyncHandler(async (req, res) => {
     
     const products = await Product.find({})
 
@@ -21,7 +21,7 @@ const getAllProducts  = asyncHandler(async (req, res) => {
 //@desc     Fetch single products
 //@route    GET /api/products/:id
 //@access   Public 
-const getSingleProducts =  asyncHandler(async (req, res) => {
+const getProductById =  asyncHandler(async (req, res) => {
    
     const product = await Product.findById(req.params.id)
 
@@ -50,4 +50,4 @@ const getTypeProducts = asyncHandler(async (req, res) => {
     }
 })
 
-export {getAllProducts, getSingleProducts, getTypeProducts}
+export {getProducts, getProductById, getTypeProducts}

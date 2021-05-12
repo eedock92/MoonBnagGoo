@@ -1,22 +1,12 @@
 import express from 'express'
-import {getAllProducts, getSingleProducts, getTypeProducts} from '../controllers/productController.js';
 const productRouter = express.Router()
-
-//@desc     Fetch All products
-//@route    GET /api/products
-//@access   Public 
-productRouter.get('/', getAllProducts )
-
-//@desc     Fetch single products
-//@route    GET /api/products/:id
-//@access   Public 
-productRouter.get('/:id', getSingleProducts )
+import {getProducts, getProductById, getTypeProducts} from '../controllers/productController.js';
 
 
-//@desc     Fetch type products
-//@route    GET /api/products/type
-//@access   public
-productRouter.get('/:type', getTypeProducts)
+productRouter.route('/').get(getProducts)
+productRouter.route('/:id').get(getProductById)
+productRouter.route('/:type').get(getTypeProducts)
+
 
 
 export default productRouter
