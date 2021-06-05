@@ -23,7 +23,7 @@ const authUser = asyncHandler(async (req, res) => {
     } else {
         res.status(401)
         throw new Error('이메일 또는 패스워드가 틀렸습니다.')
-        return
+     
     }
 })
 
@@ -31,6 +31,8 @@ const authUser = asyncHandler(async (req, res) => {
 // @route   POST /api/users/
 // @access  Public
 const registerUser = asyncHandler(async (req, res) => {
+
+    console.log("register")
     const { name, email, password } = req.body
 
     const userExists = await User.findOne({ email })
@@ -38,7 +40,7 @@ const registerUser = asyncHandler(async (req, res) => {
     if(userExists) {
         res.status(400)
         throw new Error('이미 존재하는 회원 입니다.')
-        return
+  
     }
 
     const user = await User.create({
@@ -60,7 +62,7 @@ const registerUser = asyncHandler(async (req, res) => {
       
         res.status(400)
         throw new Error('유효하지 않은 데이터 입니다')
-        return
+   
     }
 })
 
@@ -69,6 +71,8 @@ const registerUser = asyncHandler(async (req, res) => {
 // @route   GET /api/users/profile
 // @access  Private
 const getUserProfile = asyncHandler(async (req, res) => {
+
+
     const user = await User.findById(req.user._id)
 
  
@@ -82,8 +86,7 @@ const getUserProfile = asyncHandler(async (req, res) => {
         return;
     }else{
         res.status(404).json({error: 'Not found'});
-        return;
-      //  throw new Error('회원정보를 찾을 수 없습니다.')
+        throw new Error('회원정보를 찾을 수 없습니다.')
    
     }
     
@@ -94,17 +97,109 @@ const getUserProfile = asyncHandler(async (req, res) => {
 // @route   PUT /api/users/profile
 // @access  Private
 const updateUserProfile = asyncHandler(async (req, res) => {
-    const user = await User.findById(req.user._id)
+        const user = await User.findById(req.user._id)
+       
+     
+        if(user){
+    
+            user.name = req.body.name || user.name
+            user.email = req.body.email || user.email
+            
+            if(req.body.password){
+                user.password = req.body.password
+            }
+    
+            const updatedUser = await user.save()
+    
+            res.json({
+                _id : updatedUser._id,
+                name: updatedUser.name,
+                email: updatedUser.email,
+                isAdmin: updatedUser.isAdmin,
+                token: generateToken(updatedUser._id)
+            })
+    
+        
+        }else{
+          
+            res.status(404)
+            throw new Error('회원정보를 찾을 수 없습니다.')
+       
+        }
 
+
+    
+})
+
+
+
+// @desc    Get all users
+// @route   GET /api/users
+// @access  Private/Admin
+const getUsers = asyncHandler(async (req, res) => {
+   
+    const users = await User.find({})
+ 
+    if(users){
+        res.json(users)
+    }else{
+        return res.status(404)
+    }
+     
+})
+
+
+
+// @desc    Delete users
+// @route   DELETE /api/users/:id
+// @access  Private/Admin
+const deleteUsers = asyncHandler(async (req, res) => {
+    console.log("deleteUser")
+
+    const users = await User.findById(req.params.id)
+    console.log(users)
+
+    if(users){
+        await users.remove()
+        res.json({ messaage : '사용자 삭제'})
+    }else{
+        res.status(404)
+        throw new Error('사용자 발견 못함')
+    }
+     
+})
+
+
+// @desc    Get user by ID
+// @route   GET /api/users/:id
+// @access  Private/Admin
+const getUserById = asyncHandler(async (req, res) => {
+    const users = await User.findById(req.params.id)
+    //.select('-password')
+   
+    if(users){
+        res.json(users)
+    }else{
+        res.status(404)
+        throw new Error('User not found')
+    }
+     
+})
+
+
+// @desc    Update user
+// @route   PUT /api/users/profile
+// @access  Private/Admin
+const updateUser = asyncHandler(async (req, res) => {
+    const user = await User.findById(req.params.id)
+   
+ 
     if(user){
 
         user.name = req.body.name || user.name
         user.email = req.body.email || user.email
+        user.isAdmin = req.body.isAdmin || user.isAdmin
         
-        if(req.body.password){
-            user.password = req.body.password
-        }
-
         const updatedUser = await user.save()
 
         res.json({
@@ -112,18 +207,25 @@ const updateUserProfile = asyncHandler(async (req, res) => {
             name: updatedUser.name,
             email: updatedUser.email,
             isAdmin: updatedUser.isAdmin,
-            token: generateToken(updatedUser._id)
         })
-
-        return;
-    }else{
   
-        res.status(404).json({error: 'Not found'});
-        return;
-        //throw new Error('회원정보를 찾을 수 없습니다.')
+    }else{
+      
+        res.status(404)
+        throw new Error('회원정보를 찾을 수 없습니다.')
    
     }
-     
+
+
+
 })
 
-export { authUser, registerUser ,getUserProfile, updateUserProfile } 
+export { authUser, 
+         registerUser, 
+         getUserProfile, 
+         updateUserProfile, 
+         getUsers, 
+         deleteUsers, 
+         getUserById, 
+         updateUser 
+        } 

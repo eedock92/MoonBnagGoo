@@ -26,11 +26,11 @@ const PaymentScreen = ({ history }) => {
 
     return <FormContainer>
         <CheckoutSteps step1 step2 step3/>
-            <h1>결제하기</h1>
+            <h1>결제 방법 선택</h1>
             <Form onSubmit={submitHandler}>
             
                 <Form.Group>
-                    <Form.Label as ='legend'>결제 방법 선택</Form.Label>
+                    {/* <Form.Label as ='legend'>결제 방법 선택</Form.Label> */}
              
                 <Col>
                     <Form.Check 

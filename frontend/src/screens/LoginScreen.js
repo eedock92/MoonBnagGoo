@@ -60,6 +60,10 @@ const LoginScreen = ({ location, history }) => {
                 <Button type='submit' variant='primary'>
                     로그인
                 </Button>
+
+                <Button type='submit' variant='danger'>
+                <i className="fab fa-google left"></i> 구글 계정으로 로그인
+                </Button>
             </Form>
 
             <Row className = 'py-3'>

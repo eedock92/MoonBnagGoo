@@ -32,10 +32,10 @@ const CheckoutSteps = ({step1, step2, step3, step4 }) => {
             {step3 ? 
                 (
                     <LinkContainer to='/payment'>
-                        <Nav.Link>지불하기</Nav.Link>
+                        <Nav.Link>결제방법 선택</Nav.Link>
                     </LinkContainer>
                 ): 
-                (<Nav.Link disabled>지불하기</Nav.Link>)
+                (<Nav.Link disabled>결제방법 선택</Nav.Link>)
                 }
             </Nav.Item>
 

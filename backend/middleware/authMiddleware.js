@@ -13,12 +13,14 @@ const protect = AsyncHandler(async (req, res, next ) => {
 
             token = req.headers.authorization.split(' ')[1]
 
+            //Verify token
             const decoded = jwt.verify(token, process.env.JWT_SECRET)
 
-            req.user = await User.findById(decoded.id).select('-password')
+            // 사용자를 체크 .select('-password')
+            req.user = await User.findById(decoded.id)
 
             next()
-
+            
         }catch(error){
             console.error(error)
             res.status(401)
@@ -31,7 +33,16 @@ const protect = AsyncHandler(async (req, res, next ) => {
         throw new Error('인증되지 않았습니다.')
     }
 
-    next()
+   
 })
 
-export { protect }
+const admin = (req ,res, next) => {
+    if(req.user && req.user.isAdmin){
+        next()
+    }else {
+        res.status(401)
+        throw new Error('접근 권한이 없습니다.')
+    }
+}
+
+export { protect, admin }

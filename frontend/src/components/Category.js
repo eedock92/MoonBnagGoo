@@ -1,50 +1,85 @@
-import React, {useState, useEffect} from 'react'
+import React,{useState} from 'react'
 import {Link} from 'react-router-dom'
-import {Container, Row, Col} from 'react-bootstrap'
-import axios from 'axios'
+import {Row, Form, ButtonGroup, ToggleButton} from 'react-bootstrap'
 
-const Category = ({category}) => {
-    const [products, setProducts] = useState([])
 
-    useEffect(() => {
-       const fetchProducts = async () => {
-            const {data} = await axios.get('/api/products')
-       
-            setProducts(data)
-        }
-        fetchProducts()
-    }, [])
+
+
+const Category = ({history}) => {
+    const [category, setCategory] = useState('')
+    const [checked, setChecked] = useState(false);
+
+    const checkboxs     = [
+        { name : '시계', value : '1'},
+        { name : '신발', value : '2'},
+        { name : '모형제품', value : '3'},
+        { name : '전자제품', value : '4'},
+    ]
+
+
+    
+    const onSubmitHandler = (e) => {
+        console.log(category)
+        e.preventDefault()
+        history.push(`/search/${category}`)
+        
+    }
+
+   
+
+   
 
     return (
-        <>
-            <Container>
+            <>
+             <Row>
+             <Link className="btn btn-outline-primary my-3"to='/'>
+                All
+            </Link>
+       
+            <Form onSubmit={onSubmitHandler}>
+
+                <ButtonGroup toggle className="btn btn-outline-primary my-3">
+                    {checkboxs.map((check, idx) =>(
+                            <ToggleButton
+                            key={idx}
+                            type="checkbox"
+                            variant="primary"
+                            checked={checked === check.value}
+                            value={check.value}
+                            onChange= { e => setChecked(e.currentTarget.checked)}>
+                                {checkboxs.name}
+                        </ToggleButton>
+                    ))}
+                
+                </ButtonGroup>
 
                 
+               
+                <Form.Label
+                    className="btn btn-outline-primary my-3"
+                    type="submit"
+                    value='전자제품'
+                    onClick={e => setCategory(e.target.value)}>
+                        전자제품
+                </Form.Label>        
+                    
+                <Form.Label 
+                    className="btn btn-outline-primary my-3" 
+                         type="submit"
+                        value='시계'
+                     onChange={e => setCategory(e.target.value)}>
+                    시계
+                </Form.Label>
+                    
+                <Form.Label className="btn btn-outline-primary my-3" 
+                                value='장난감'>
+                                장난감
+                </Form.Label>
 
-                <Row>
-                    <Col key={products.category}
-                    className = "d-flex justify-content-center" >
-
-                            <Link className="btn btn-outline-primary my-3" to='/'>
-                                All
-                            </Link>
-
-                            <Link className="btn btn-outline-primary my-3" to='/카메라'>
-                                카메라
-                            </Link>
-
-                            <Link className="btn btn-outline-primary my-3" to='/헤드폰'>
-                                헤드폰
-                            </Link>
-
-                            <Link className="btn btn-outline-primary my-3" to='/휴대폰'>
-                                휴대폰
-                            </Link>
-
-                    </Col>
-                </Row>
-            </Container>
-        </>
+            </Form>
+            
+            </Row>
+   </>
     )
 }
 

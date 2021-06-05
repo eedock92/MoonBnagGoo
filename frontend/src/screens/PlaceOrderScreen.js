@@ -33,6 +33,8 @@ const PlaceOrderScreen = ({history}) => {
     }, [history, success])
 
     const placeOrderHandler = () => {
+      
+        
         dispatch(createOrder({
             orderItems : cart.cartItems,
             shippingAddress : cart.shippingAddress,
@@ -42,6 +44,8 @@ const PlaceOrderScreen = ({history}) => {
             taxPrice: cart.taxPrice,
             totalPrice: cart.totalPrice,
         }))
+        console.log("주문하기")
+        return
     }
 
 

@@ -98,7 +98,7 @@ const RegisterScreen = ({ location, history }) => {
                 <Col>
                     이미 계정이 있으신가요? {' '}
                     <Link to = {redirect ? `/login?redirect=${redirect}` : '/login'}>
-                        회원가입
+                        로그인
                     </Link>
                 </Col>
             </Row>

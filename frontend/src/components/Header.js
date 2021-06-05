@@ -1,4 +1,5 @@
 import React from 'react'
+import { Route } from 'react-router-dom'
 import Search from './Search.js'
 import {LinkContainer} from 'react-router-bootstrap'
 import {Navbar, Nav, Container, NavDropdown} from 'react-bootstrap'
@@ -29,9 +30,10 @@ const Header = () => {
 
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
+                 <Route render={({ history }) => <Search history={history}/>} />
                         <Nav className="ml-auto">
                 
-                <Search/>
+              
 
                 <LinkContainer to='/cart'>
                         <Nav.Link>
@@ -46,16 +48,30 @@ const Header = () => {
                         <LinkContainer to='/profile'>
                             <NavDropdown.Item>회원정보</NavDropdown.Item>
                         </LinkContainer>
-                            <NavDropdown.Item onClick = {logoutHandler}>로그아웃</NavDropdown.Item>
+                            <NavDropdown.Item onClick = {logoutHandler}>
+                                로그아웃
+                        </NavDropdown.Item>
                     </NavDropdown>
-                ) : 
-                (
+                ) : (
                     <LinkContainer to='/login'>
-                    <Nav.Link><i className = "fas fa-user"></i></Nav.Link>
+                    <Nav.Link>
+                        <i className = "fas fa-user"></i>
+                    </Nav.Link>
                     </LinkContainer>
-                )
-                
-            }
+                )}
+                {userInfo && userInfo.isAdmin && (
+                        <NavDropdown title='Admin' id='adminmenu'>
+                          <LinkContainer to='/admin/userlist'>
+                              <NavDropdown.Item>사용자</NavDropdown.Item>
+                          </LinkContainer>
+                          <LinkContainer to='/admin/productlist'>
+                              <NavDropdown.Item>상품</NavDropdown.Item>
+                          </LinkContainer>
+                          <LinkContainer to='/admin/ordertlist'>
+                              <NavDropdown.Item>주문</NavDropdown.Item>
+                          </LinkContainer>    
+                       </NavDropdown>
+                )}
         
            
                         </Nav>
