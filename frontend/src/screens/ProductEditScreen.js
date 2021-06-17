@@ -34,10 +34,14 @@ const ProductEditScreen = ({ match, history}) => {
         } = productUpdate
 
     useEffect(() => {
+
         if(successUpdate){
+
             dispatch({type : PRODUCT_UPDATE_RESET})
             history.push('/admin/productlist')
+
         }else{
+
             if(!product.name || product._id !== productId){
                 dispatch(listProductDetails(productId))
             }else{
@@ -51,6 +55,7 @@ const ProductEditScreen = ({ match, history}) => {
                     setDescription(product.description)
                 
             }
+
         }
        
    
@@ -64,14 +69,14 @@ const ProductEditScreen = ({ match, history}) => {
         setUploading(true)
 
         try {
+
             const config = { 
-                headers: {
-                    'Content-Type' : 'multipart/form-data',
+                headers : {
+                    'Content-Type' : 'multipart/form-data'
                 },
             }
             
-            console.log(formData)
-            console.log("uploadFile_axios : ") 
+            console.log("uploadFile_axios") 
             const { data } = await axios.post('api/upload', formData, config)
 
             setImage(data)
@@ -118,7 +123,7 @@ const ProductEditScreen = ({ match, history}) => {
             ) : 
             (
                 
-            <Form onSubmit={submitHandler}>
+        <Form onSubmit={submitHandler}>
 
                 <Form.Group controlId='name'>
                     <Form.Label>이름</Form.Label>
