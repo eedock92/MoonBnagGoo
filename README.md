@@ -41,14 +41,22 @@ react-redux-node.express-mongodb를 이용한 온라인 쇼핑몰
 
 7.상품 주문
 
+  a.배송지 선택
+  
+  ![ScreenClip](https://user-images.githubusercontent.com/37561568/124264450-72def800-db6f-11eb-9c5d-d897d11245eb.png)
 
+
+  b.결제 방법 선택
+  
+  ![ScreenClip](https://user-images.githubusercontent.com/37561568/124264464-78d4d900-db6f-11eb-9e2a-b3738ddaf29a.png)
+  
+  c.주문하기
+
+  ![ScreenClip](https://user-images.githubusercontent.com/37561568/124264514-88542200-db6f-11eb-94aa-88400a493d89.png)
 
 
 관리자 기능 
 
 
 
-![ScreenClip](https://user-images.githubusercontent.com/37561568/124262491-167ad900-db6d-11eb-9150-3c1dbcceb1f6.png)
-![ScreenClip](https://user-images.githubusercontent.com/37561568/124262540-24305e80-db6d-11eb-8812-43b0f558c8b7.png)
-![ScreenClip](https://user-images.githubusercontent.com/37561568/124262557-27c3e580-db6d-11eb-82e9-5ccdf4ad4908.png)
 
