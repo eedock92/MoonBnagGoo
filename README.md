@@ -3,11 +3,12 @@ react-redux-node.express-mongodb를 이용한 온라인 쇼핑몰
 디자이너의 굳즈, 장난감 판매
 
 주요 기능 
-
+ 
  jwt인증 방식 로그인, 회원가입, 
  상품 장바구니 추가, 상품 검색,
- paypal 결제
-
+ paypal 결제, 회원정보 변경
+ 
+ 관리자 : 상품등록, 삭제, 수정, 회원 등록, 수정 
 
 
 페이지
@@ -60,8 +61,13 @@ react-redux-node.express-mongodb를 이용한 온라인 쇼핑몰
    ![image](https://user-images.githubusercontent.com/37561568/124264872-fdbff280-db6f-11eb-9935-b1bc2be893fa.png)
 
 
-관리자 기능 
+관리자
+
+1.사용자 관리
+![image](https://user-images.githubusercontent.com/37561568/124265312-7921a400-db70-11eb-9bab-5850fb88c96a.png)
 
 
 
+2.상품 관리
+![ScreenClip](https://user-images.githubusercontent.com/37561568/124265334-7f178500-db70-11eb-955c-db6d1a76031f.png)
 
