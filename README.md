@@ -57,6 +57,8 @@ react-redux-node.express-mongodb를 이용한 온라인 쇼핑몰
 
   ![ScreenClip](https://user-images.githubusercontent.com/37561568/124264514-88542200-db6f-11eb-94aa-88400a493d89.png)
 
+   ![image](https://user-images.githubusercontent.com/37561568/124264872-fdbff280-db6f-11eb-9935-b1bc2be893fa.png)
+
 
 관리자 기능 
 
