@@ -4,6 +4,9 @@ react-redux-node.express-mongodb를 이용한 온라인 쇼핑몰
 
 주요 기능 
 
+ jwt인증 방식 로그인, 회원가입, 
+ 상품 장바구니 추가, 상품 검색,
+ paypal 결제
 
 
 
