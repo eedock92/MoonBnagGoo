@@ -3,10 +3,11 @@ import express from 'express'
 import multer from 'multer'
 const router = express.Router()
 
+
 const storage = multer.diskStorage({
 
     destination(req, file, cb){
-        cb(null, 'uploads/')
+        cb(null, 'uploads')
     },
 
     filename(req, file, cb){
@@ -16,6 +17,7 @@ const storage = multer.diskStorage({
 })
  
 function checkFileType(file, cb){ 
+    console.log("Check file Type")
     const filetypes = /jpg|jpeg|png/
     const extname = filetypes.test(path.extname(file.originalname).toLowerCase())
     const mimetype = filetypes.test(file.mimetype)
@@ -23,7 +25,7 @@ function checkFileType(file, cb){
     if(extname && mimetype){
         return cb(null, true)
     } else {
-        cb('Images only!')
+        cb('이미지 파일만 가능!')
     }
 }
 

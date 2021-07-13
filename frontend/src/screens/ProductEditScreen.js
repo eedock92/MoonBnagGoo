@@ -63,13 +63,12 @@ const ProductEditScreen = ({ match, history}) => {
 
     const uploadFileHandler = async (e) => {
         const file = e.target.files[0]
-        console.log(file)
         const formData = new FormData()
         formData.append('image', file)
         setUploading(true)
 
         try {
-
+            console.log(formData)
             const config = { 
                 headers : {
                     'Content-Type' : 'multipart/form-data'
@@ -77,7 +76,7 @@ const ProductEditScreen = ({ match, history}) => {
             }
             
             console.log("uploadFile_axios") 
-            const { data } = await axios.post('api/upload', formData, config)
+            const { data } = await axios.post('/api/upload', formData, config)
 
             setImage(data)
             setUploading(false)
